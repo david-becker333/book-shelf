@@ -1,0 +1,152 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #eeeeee;
+}
+
+.header {
+  margin: 10px -20px 15px -20px;
+  padding: 0 15px;
+  height: 74px;
+  border-bottom: 1px dashed #ccc;
+
+  .title {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    h1 {
+      display: flex;
+      align-items: flex-end;
+      font-size: 20pt;
+    }
+    .js-box {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      background-color: #fad84a;
+      height: 40px;
+      width: 40px;
+      margin-right: 2px;
+    }
+  }
+}
+
+.main {
+  .sort-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .divider {
+    height: 1px;
+    margin: 15px 0;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+  }
+  .page-size {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      input {
+        width: 50px;
+        height: 39px;
+        margin: 0px 10px;
+      }
+    }
+  }
+  .reset {
+    display: flex;
+    justify-content: center;
+  }
+  .spinner-panel {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .spinner {
+      display: inline;
+    }
+  }
+  .book-listing {
+    margin: 0;
+    padding: 0;
+
+    li.book {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 300px;
+      height: 440px;
+      .number {
+        display: flex;
+        justify-content: start;
+        width: 100%;
+        .index {
+          width: 70px;
+          font-size: 31px;
+          font-weight: bold;
+          color: #a9a7a7;
+          margin: 5px 0;
+        }
+      }
+      .book-cover {
+        img {
+          width: 130px;
+        }
+      }
+
+      .book-info {
+        margin: 10px 0;
+        width: 250px;
+
+        .author {
+          display: flex;
+          justify-content: center;
+          font-style: italic;
+          color: #3e2c17;
+        }
+        .title {
+          display: flex;
+          justify-content: center;
+          font-size: 16px;
+          font-weight: 800;
+          white-space: nowrap;
+        }
+        .separator {
+          display: flex;
+          justify-content: center;
+          height: 30px;
+          .line {
+            background-color: #eb3324;
+            position: relative;
+            top: 50%;
+            width: 50px;
+            height: 3px;
+          }
+        }
+        .details {
+          color: #9a9999;
+          font-size: 13px;
+          margin: 11px 0;
+          .label {
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  display: block;
+}

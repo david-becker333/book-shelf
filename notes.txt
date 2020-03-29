@@ -1,0 +1,38 @@
+
+Notes:
+==========================
+
+This is an Angular CLI example of the book shelf application.  Below are the instructions to install the demo.
+
+Requirements:
+-----------------
+Node.js NPM
+Angular CLI
+
+
+Installation:
+
+Unzip the application and change into the directory 'book-shelf'.
+
+From a command line enter:
+
+npm install
+
+npm install -g @angular/cli
+
+ng serve  // start webpack dev server
+
+
+Open a browser and point to http://localhost:4200
+
+
+
+
+Comments:
+-------------------
+
+The application meets most of the core functionality required.  Due to time limitations certain UI features like book selection overlay were ommitted.  The main focus was on NGRX and RXJS aspects and state management aproach.
+
+
+
+
