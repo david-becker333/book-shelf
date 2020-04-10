@@ -1,4 +1,4 @@
-import { IActivity } from '../shared/model/app.model';
+
 
 export const startLoading = (state: any) => {
     state.loading = true;

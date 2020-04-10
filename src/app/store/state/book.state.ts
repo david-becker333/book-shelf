@@ -1,6 +1,7 @@
 import { IBook } from 'src/app/shared/model/book.model';
 import { Store, createSelector, createFeatureSelector } from '@ngrx/store';
 import { IState, IActivity } from '.';
+import * as moment from 'moment';
 
 export interface IBookShelfState extends IActivity {
   books?: IBook[],
@@ -20,8 +21,8 @@ export const initialBookShelfState: IBookShelfState = {
 export const selectFeature = (state: IState) => state.bookShelf;
 
 export const selectBooks = createSelector(
-    selectFeature,
-    (state: IBookShelfState) => state.books
+  selectFeature,
+  (state: IBookShelfState) => state.books
 );
 
 export const selectCurrentBook = createSelector(
@@ -38,3 +39,11 @@ export const isBookShelfLoaded = createSelector(
   selectFeature,
   (state: IBookShelfState) => state.loaded
 );
+
+export const selectMostRecent = createSelector(
+  selectFeature,
+  (state: IBookShelfState) => state.books.filter(book => {
+    const publishedDate = moment(book.releaseDate).subtract(10, 'days');
+    return moment(book.releaseDate) > publishedDate;
+  })
+)

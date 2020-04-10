@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-lg-3 col-md-3">
+      <aside>
+        <form [formGroup]="bookFormGroup">
+          <h5>Sort by</h5>
+          <ul class="sort-list">
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" formControlName="sort" name="sort" value="author" type="radio">
+                <label class="form-check-label" for="exampleRadios1">
+                  Author
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" formControlName="sort" name="sort" value="releaseDate" type="radio">
+                <label class="form-check-label" for="exampleRadios1">
+                  Release date
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" formControlName="sort" name="sort" value="pages" type="radio">
+                <label class="form-check-label" for="exampleRadios1">
+                  Number of pages
+                </label>
+              </div>
+            </li>
+          </ul>
+          <div class="divider"></div>
+          <h5>Show only</h5>
+          <ul class="page-size">
+            <li><span>Show</span> <input formControlName="pageSize" type="text"> <span>books</span></li>
+          </ul>
+          <div class="divider"></div>
+          <div class="reset">
+            <button class="btn btn-secondary" (click)="resetBookFormGroup()">Reset</button>
+          </div>
+        </form>
+      </aside>
+    </div>
+    <div class="col-lg-9 col-md-9">
+      <main>
+        <div *ngIf="isBooksLoading$ | async" class="spinner-panel"><div class="spinner">Loading...</div></div>
+        <ol *ngIf="isBooksLoaded$ | async" class="book-listing row">
+          <li *ngFor="let book of books$ | async; let i = index;" class="book">
+            <div class="number">
+              <div class="index">{{i}}</div>
+            </div>
+            <div class="row book-cover">
+              <div class="col">
+                <a>
+                  <img src="{{book.cover.small}}">
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="book-info">
+                  <div class="row">
+                    <div class="col">
+                      <div class="title">{{book.title}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="separator">
+                        <div class="line"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="author">By {{book.author}}</div>
+                    </div>
+                  </div>
+                  <div class="details">
+                    <div class="row">
+                      <div class="col-6 px-1"><span class="label">Release Date:</span></div>
+                      <div class="col-6 px-1">{{dateFixer(book.releaseDate) | date: 'M/y'}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 px-1"><span class="label">Pages:</span></div>
+                      <div class="col-6 px-1">{{book.pages}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 px-1"><span class="label">Link:</span></div>
+                      <div class="col-6 px-1"><a href="{{book.link}}" target="_blank">Shop</a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </main>
+    </div>
+  </div>

@@ -11,16 +11,23 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from './store/effects/book.effects';
 import { BookService } from './core/services/book.service';
+import { BookComponent } from './book/book.component';
+import { BookModule } from './book/book.module';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './app-route.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   imports: [
     BrowserModule,
+    SharedModule.forRoot(),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(rootReducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([BookEffects])
+    EffectsModule.forRoot([BookEffects]),
+    RouterModule.forRoot(appRoutes)
   ],
   declarations: [
     AppComponent
