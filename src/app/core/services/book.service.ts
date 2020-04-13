@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { IBook } from '../../shared/model/book.model';
 import { Observable } from 'rxjs';
 import { dateFormatFixer } from '../../shared/utils';
+import { map } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class BookService {
@@ -17,7 +18,12 @@ export class BookService {
     }
 
     get(id: number): Observable<IBook> {
-        return this.http.get<IBook>(`${this.resourceUrl}/${id}`);
+        // return this.http.get<IBook>(`${this.resourceUrl}/${id}`).pipe(
+        return this.http.get<IBook[]>(`${this.resourceUrl}`).pipe(
+            map((books: IBook[]) => {
+                return books.find(b => b.id === id)
+            })
+        );
     }
 
     create(book: IBook): Observable<IBook> {

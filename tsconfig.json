@@ -11,6 +11,9 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
+    "types": [
+      "jest"
+    ],
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -18,7 +21,11 @@
       "es2018",
       "dom"
     ],
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "@core/*": ["src/app/core/*"],
+      "@state/*": ["src/app/state/*"],
+    }
   },
   "exclude": [
     "node_modules"

@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
+export const importExports = [
+  ReactiveFormsModule,
+  FormsModule,
+  HttpClientModule,
+  CommonModule
+];
 
 @NgModule({
   imports: [
-    ReactiveFormsModule],
+    ...importExports
+  ],
   exports: [
-    FormsModule, 
-    CommonModule, 
-    ReactiveFormsModule
+    ...importExports
   ]
 })
 export class SharedLibsModule {

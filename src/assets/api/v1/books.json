@@ -1,5 +1,6 @@
 [
     {
+      "id": 1001,
       "cover": {
         "large": "https://covers.oreillystatic.com/images/9780596517748/lrg.jpg",
         "small": "https://covers.oreillystatic.com/images/9780596517748/cat.gif"
@@ -11,6 +12,7 @@
       "link": "http://shop.oreilly.com/product/9780596517748.do"
     },
     {
+      "id": 1002,
       "cover": {
         "large": "https://covers.oreillystatic.com/images/9780596000486/lrg.jpg",
         "small": "https://covers.oreillystatic.com/images/9780596000486/cat.gif"
@@ -22,6 +24,7 @@
       "link": "http://shop.oreilly.com/product/9780596000486.do"
     },
     {
+      "id": 1003,
       "cover": {
         "large": "https://covers.oreillystatic.com/images/0636920025832/lrg.jpg",
         "small": "https://covers.oreillystatic.com/images/0636920025832/cat.gif"
@@ -33,6 +36,7 @@
       "link": "http://shop.oreilly.com/product/0636920025832.do"
     },
     {
+      "id": 1004,
       "cover": {
         "large": "https://covers.oreillystatic.com/images/0636920027713/lrg.jpg",
         "small": "https://covers.oreillystatic.com/images/0636920027713/cat.gif"
@@ -44,6 +48,7 @@
       "link": "http://shop.oreilly.com/product/0636920027713.do"
     },
     {
+      "id": 1005,
       "cover": {
         "large": "https://covers.oreillystatic.com/images/0636920033141/lrg.jpg",
         "small": "https://covers.oreillystatic.com/images/0636920033141/cat.gif"
@@ -55,6 +60,7 @@
       "link": "http://shop.oreilly.com/product/0636920033141.do"
     },
     {
+      "id": 1006,
       "cover": {
         "large": "https://covers.oreillystatic.com/images/0636920047124/lrg.jpg",
         "small": "https://covers.oreillystatic.com/images/0636920047124/cat.gif"
