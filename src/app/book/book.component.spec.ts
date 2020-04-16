@@ -1,33 +1,76 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, fakeAsync } from '@angular/core/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { BookComponent } from './book.component';
 import { IState } from '../store/state';
 import { BookService } from '../core/services/book.service';
-import { MemoizedSelector } from '@ngrx/store';
+import { MemoizedSelector, Store } from '@ngrx/store';
 import { IBook } from '../shared/model/book.model';
 import { TestModule } from '../test/test.module';
 import { SharedModule } from '../shared/shared.module';
-
+import * as fromBooks from '../store/actions/book.actions';
+import { cold } from 'jasmine-marbles';
+import { selectBooks, isBookShelfLoading, isBookShelfLoaded } from '../store/state/book.state';
+import { By } from '@angular/platform-browser';
 
 describe('BookComponent', () => {
 
+  const testBooks: IBook[] = [
+    {
+      id: 1001,
+      cover: {
+        large: 'https://covers.oreillystatic.com/images/9780596517748/lrg.jpg',
+        small: 'https://covers.oreillystatic.com/images/9780596517748/cat.gif'
+      },
+      title: 'JavaScript: The Good Parts',
+      author: 'Douglas Crockford',
+      releaseDate: '12/2008',
+      pages: 172,
+      link: 'http://shop.oreilly.com/product/9780596517748.do'
+    }
+  ];
 
+  const testSelectedBook: IBook = {
+    id: 1001,
+    cover: {
+      large: 'https://covers.oreillystatic.com/images/9780596517748/lrg.jpg',
+      small: 'https://covers.oreillystatic.com/images/9780596517748/cat.gif'
+    },
+    title: 'JavaScript: The Good Parts',
+    author: 'Douglas Crockford',
+    releaseDate: '12/2008',
+    pages: 172,
+    link: 'http://shop.oreilly.com/product/9780596517748.do'
+  };
 
   let fixture: ComponentFixture<BookComponent>;
 
-  let comp: BookComponent;
+  let component: BookComponent;
+
+  let store: MockStore<IState>;
+
+  let mockSelectBooks: MemoizedSelector<any, IBook[]>;
+
+  let mockSelectBook: MemoizedSelector<any, IBook>;
+
+  let mockIsLoading: MemoizedSelector<any, boolean>;
+
+  let mockIsLoaded: MemoizedSelector<any, boolean>;
+
+  const getBookItems = () => fixture.debugElement.queryAll(By.css('.book-listing li'));
+
+  // const getBookItem = () => fixture.debugElement.query(By.css('.book-label'));
 
 
   const initialState: IState = {
-    app: { login: false },
     bookShelf: {
       books: [],
-      selectedBook: null
+      selectedBook: null,
+      error: null
     }
   };
 
 
-  beforeEach(async(() => {
+  beforeEach(() => {
 
     TestBed.configureTestingModule({
       imports: [
@@ -38,50 +81,53 @@ describe('BookComponent', () => {
         BookComponent
       ],
       providers: [
-        provideMockStore({ initialState }),
-        {
-          provide: BookService,
-          useValue: {
-              query: jest.fn(),
-              get: jest.fn()
-          }
-        }
+        provideMockStore({ initialState })
       ]
-    }).compileComponents();
+    });
 
+    store = TestBed.get(Store);
+    mockSelectBooks = store.overrideSelector(selectBooks, []);
+    // mockSelectBook = store.overrideSelector(selectBook, null);
+    mockIsLoading = store.overrideSelector(isBookShelfLoading, false);
+    mockIsLoaded = store.overrideSelector(isBookShelfLoaded, true);
     
+
     fixture = TestBed.createComponent(BookComponent);
-    comp = fixture.debugElement.componentInstance;
+    component = fixture.debugElement.componentInstance;
 
-    // mockStore = TestBed.get(MockStore);
-    // bookService = TestBed.get(BookService);
+    fixture.detectChanges();
 
-    // mockBookSelector = mockStore.overrideSelector(
-    //   selectBooks,
-    //   []
-    // );
-    // mockStore.refreshState();
-    
+    // loader = TestbedHarnessEnvironment.loader(fixture);
+    //  dispatchSpy = spyOn(store, 'dispatch');
 
-  }));
+
+  });
 
   it('should create an instance', () => {
-    expect(comp).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
 
-//   it('Should have a title.', fakeAsync(() => {
+   it('should be created with 0 books', () => {
+    fixture.detectChanges();
 
-//     bookServiceSpy.getBooks.and.returnValue(asyncData([]));
-
-//     fixture.detectChanges();
-
-//     expect(comp.title).toEqual('Book Store');
-//   }));
+    expect(component).toBeTruthy();
+    expect(getBookItems().length).toBe(0);
+  });
 
 
-//   it('Should have a title.', () => {
-//     expect(comp.title).toEqual('Book Store');
-//   });
+  it('should display books', () => {
+    mockSelectBooks.setResult(testBooks);
+    mockIsLoading.setResult(false);
+    mockIsLoaded.setResult(true);
+    store.refreshState();
+
+    fixture.detectChanges();
+  
+    expect(getBookItems().length).toBe(1);
+    // expect(getBookItems()[0].nativeElement.textContent.trim()).toBe('test');
+  });
+
+  
 });
 

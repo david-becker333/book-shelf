@@ -9,6 +9,7 @@ import { map, debounceTime } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { selectBooks, isBookShelfLoading, isBookShelfLoaded } from '../store/state/book.state';
 import { dateFormatFixer } from '../shared/utils';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-book',
@@ -39,8 +40,14 @@ export class BookComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<IState>
-  ) { }
+    private store: Store<IState>,
+    private http: HttpClient
+  ) { 
+   
+     http.get('https://raw.githubusercontent.com/scrollmapper/bible_databases/master/json/t_kjv.json', {}).subscribe(bible => {
+       console.log(bible);
+     }) 
+  }
 
   ngOnInit() {
     this.bookFormGroup = this.createBookFormGroup();
