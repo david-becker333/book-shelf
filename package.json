@@ -25,7 +25,7 @@
     "@ngrx/store": "^8.6.0",
     "@ngrx/store-devtools": "^8.6.0",
     "bootstrap": "^4.4.1",
-    "immer": "^4.0.2",
+    "immer": "^9.0.6",
     "moment": "^2.24.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
